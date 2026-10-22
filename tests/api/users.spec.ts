@@ -2,19 +2,19 @@ import { test, expect } from "../../fixtures/apiFixtures";
 
 test.describe("ReqRes User API", () => {
 
-    test("Create user", async ({ request }) => {
+    test("Create and delete user", async ({ userApi }) => {
 
-        const response = await request.post("/api/users", {
-            data: {
-                name: "Naveen",
-                job: "QA Automation Engineer"
-            }
-        });
+        const createResponse = await userApi.createUser(
+            "Naveen",
+            "QA Automation Engineer"
+        );
 
-        console.log("STATUS:", response.status());
-        console.log("BODY:", await response.text());
+        expect(createResponse.status()).toBe(201);
 
-        expect(response.status()).toBe(201);
+        const { id } = await createResponse.json();
+        const deleteResponse = await userApi.deleteUser(id);
+
+        expect(deleteResponse.status()).toBe(204);
     });
 
 });
