@@ -11,10 +11,10 @@ export class LoginPage {
     constructor(page: Page) {
         this.page = page;
 
-        this.usernameInput = page.locator("#userName");
-        this.passwordInput = page.locator("#password");
-        this.loginButton = page.locator("#login");
-        this.newUserButton = page.locator("#newUser");
+        this.usernameInput = page.getByPlaceholder("UserName");
+        this.passwordInput = page.getByPlaceholder("Password");
+        this.loginButton = page.getByRole("button", { name: "Login", exact: true });
+        this.newUserButton = page.getByRole("button", { name: "New User", exact: true });
     }
 
     async navigate() {

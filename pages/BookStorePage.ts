@@ -16,9 +16,7 @@ export class BookStorePage {
             exact: true
         });
 
-        this.searchBox = page.getByRole("textbox", {
-            name: "Type to search"
-        });
+        this.searchBox = page.locator("#searchBox");
 
         // Actual data rows
         this.bookRows = page.locator("table tbody tr");
@@ -26,6 +24,8 @@ export class BookStorePage {
 
     async clickBookStore(): Promise<void> {
         await this.bookStoreButton.click();
+        await this.page.waitForURL(/\/books$/);
+        await this.searchBox.waitFor({ state: "visible" });
     }
 
     async searchBook(bookName: string): Promise<void> {

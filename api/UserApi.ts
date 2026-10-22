@@ -47,4 +47,8 @@ export class UserApi {
 
         return response;
     }
+
+    async deleteUser(userId: string) {
+        return await this.request.delete(`/api/users/${userId}`);
+    }
 }
