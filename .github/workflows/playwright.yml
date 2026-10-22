@@ -1,3 +1,4 @@
+
 name: Playwright Tests
 
 on:
@@ -8,7 +9,7 @@ on:
 
 jobs:
   test:
-    timeout-minutes: 60
+    timeout-minutes: 30
     runs-on: ubuntu-latest
 
     env:
@@ -28,7 +29,7 @@ jobs:
         run: npm ci
 
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
+        run: npx playwright install chromium
 
       - name: Run Playwright tests
         run: npx playwright test
@@ -40,3 +41,4 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+          if-no-files-found: ignore
